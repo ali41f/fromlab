@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 //these route belongs to AvailAbleTest
 Route::group(['middleware' => ['auth','inventory']], function () {
+    
+    Route::get('print-tests', [Controllers\AvailableTestController::class,'print'])->name('print-tests');
 
     Route::get('available-tests', [Controllers\AvailableTestController::class,'index'])->name('available-tests');
     Route::get('available-test-create',[Controllers\AvailableTestController::class,'create'])->name('available-test-create');

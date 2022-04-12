@@ -25,6 +25,12 @@ class AvailableTestController extends Controller
         $availableTests = AvailableTest::all()->sortByDesc("id");
         return view('admin.availableTests.index', compact('availableTests'));
     }
+    
+    public function print()
+    {
+        $availableTests = AvailableTest::all()->sortBy("category.Cname");
+        return view('admin.availableTests.print', compact('availableTests'));
+    }
 
     public function create()
     {
