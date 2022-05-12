@@ -28,7 +28,7 @@ class AvailableTestController extends Controller
     
     public function print()
     {
-        $availableTests = AvailableTest::all()->sortBy("category.Cname");
+        $availableTests = AvailableTest::all()->sortBy("name");
         return view('admin.availableTests.print', compact('availableTests'));
     }
 

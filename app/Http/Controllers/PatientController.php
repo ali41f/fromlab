@@ -100,7 +100,7 @@ class PatientController extends Controller
     {
         $this->validate($request,[
             'Pname' => 'required|max:120',
-            'phone' => 'min:10|nullable|numeric',
+            'phone' => 'min:03000000000|max:03999999999|nullable|numeric',
             ]);
         $patient = new Patient();
         $patient->Pname = $request->Pname;
@@ -135,9 +135,14 @@ class PatientController extends Controller
     }
     public function update($id, Request $request)
    {
+    $this->validate($request,[
+        'Pname' => 'required|max:120',
+        'phone' => 'min:03000000000|max:03999999999|nullable|numeric',
+        ]);
         $patient = Patient::findOrFail($id);
         // $input = $request->all();
         // $patient->fill($input)->save();
+        
         if (!empty($request->Pname)) {
             $patient->Pname = $request->Pname;
         } else {

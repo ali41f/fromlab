@@ -81,8 +81,8 @@
             @include("admin.TestPerformed.partial_report")
 
             <div class="webfooter noprint">
-                <div class="webfooter-item abu"><strong class="drname">Dr. Usama Rehman</strong><br />Assistant Professor<br />MBBS, FCPS (Histopathology)<br />Consultant Histopathology</div>
-                <div class="webfooter-item bhai"><strong class="drname">Prof. Dr. Abdul Hakeem Ch.</strong><br />MBBS, DCP<br />M.Phil (Microbiology)<br />Consultant Pathology</div>
+                <div class="webfooter-item abu"><strong class="drname">Dr. Usama Rehman</strong><br />Assistant Professor<br />MBBS, FCPS (Histopathology)<br />Consultant Histopathologist</div>
+                <div class="webfooter-item bhai"><strong class="drname">Prof. Dr. Abdul Hakeem Ch.</strong><br />MBBS, DCP<br />M.Phil (Microbiology)<br />Consultant Pathologist</div>
             </div>
             <div class="abfooter noprint">
                 <strong>Proviso:</strong> This report is prepared with utmost care and professional expertise; however no legal responsibility or financial liability is accepted for any unavoidable errors and omissions because of lack of identity of the person. Therefore report is not valid for claims and compensations or presentation in the court of law.<br />This is computer generated report. It doesn't require any signature or stamp.

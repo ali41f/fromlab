@@ -39,8 +39,8 @@
         padding: .3rem 1rem;
     }
 
-    .normalrangetd{
-        font-size: 20px;
+    .normalrangetd, .unittd{
+        font-size: 18px;
     }
 
     .table th {
@@ -77,7 +77,7 @@
         margin-bottom: 0.3rem;
     }
     .editordiv table td{
-        padding: 8px 12px 2px 12px;
+        padding: 0px 12px 2px 12px;
         border: 1px solid black;
         font-size: 25px;
         text-align: center;
@@ -121,7 +121,7 @@
                     @foreach($testPerformedsId->testReport->where("table_num",1)->sortBy("order") as $testReport)
                         <tr>
                             <td>{{$testReport->report_item->title}}</td>
-                            <td class="">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit }}</td>
+                            <td class="unittd">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit }}</td>
                             <td>{{ $testReport->value }}</td>
                             @foreach($getpatient->testPerformed->where("available_test_id",$testPerformedsId->availableTest->id)->where("id","<",$testPerformedsId->id)->sortByDesc('id')->take(2) as $old_test)
                                 @php
@@ -161,7 +161,7 @@
                         @foreach($testPerformedsId->testReport->where("table_num",2)->sortBy("order") as $testReport)
                             <tr>
                                 <td>{{$testReport->report_item->title}}</td>
-                                <td class="">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit}}</td>
+                                <td class="unittd">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit}}</td>
                                 <td>{{ $testReport->value }}</td>
                                 @foreach($getpatient->testPerformed->where("available_test_id",$testPerformedsId->availableTest->id)->where("id","<",$testPerformedsId->id)->sortByDesc('id')->take(2) as $old_test)
                                     @php
@@ -203,7 +203,7 @@
                         @foreach($testPerformedsId->testReport->where("table_num",3)->sortBy("order") as $testReport)
                             <tr>
                                 <td>{{$testReport->report_item->title}}</td>
-                                <td class="">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit}}</td>
+                                <td class="unittd">{{$testReport->report_item->unit == '-'? '' : $testReport->report_item->unit}}</td>
                                 <td>{{ $testReport->value }}</td>
                                 @foreach($getpatient->testPerformed->where("available_test_id",$testPerformedsId->availableTest->id)->where("id","<",$testPerformedsId->id)->sortByDesc('id')->take(2) as $old_test)
                                     @php

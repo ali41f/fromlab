@@ -237,10 +237,10 @@
             $( ".save_btn" ).click(function() {
                 referred = $("#referred").val();
                 let Receipt_styles = "<style>"
-                Receipt_styles+=".receipt_con{font-family: Arial; width:300px; margin: 0 auto; border-radius: 5px; margin-bottom: 10px; border: 1px solid black; padding: 20px;}"
+                Receipt_styles+=".receipt_con{font-family: Arial; width:290px; margin: 0 auto; border-radius: 5px; margin-bottom: 10px; border: 1px solid black; padding: 30px;}"
                 Receipt_styles+=".receipt_con h3{text-align: center; margin-top:0;margin-bottom: 10px;}"
                 Receipt_styles+=".receipt_con p{text-align: center;}"
-                Receipt_styles+=".receipt_con table{font-size: 14px; text-align: left; width: 100%}"
+                Receipt_styles+=".receipt_con table{font-size: 13px; text-align: left; width: 100%}"
                 Receipt_styles+="</style>"
 
                 let d = Date.now();
@@ -249,7 +249,7 @@
                 let t = (d.getHours() > 12 ? d.getHours() - 12 : d.getHours())+':'+d.getMinutes()+' '+(d.getHours() >= 12 ? "PM" : "AM");
 
                 let Receipt_html = Receipt_styles+"<div class='receipt_con'><h3>Welcome to Usama Laboratory</h3><p><strong>www.usamalab.com</strong></p>";
-                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br />Receipt</p>";
+                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br />WhatsApp: 03253411392<br />Receipt</p>";
 
                 Receipt_html+="<table class='table'>"
                 Receipt_html+="<tr><td>Patient's name</td><td>"+$('#patient_id option:selected').attr('patientName').trim()+"</td></tr>"
@@ -261,7 +261,7 @@
                 Receipt_html+="<tr><td>Referred by</td><td>"+referred+"</td></tr>"
                 Receipt_html+="<tr><td>Lab attendant</td><td>"+username+"</td></tr></table><hr />"
 
-                Receipt_html+="<table><tr><th>Test</th><th>Fee</th></tr>"
+                Receipt_html+="<table><tr><th width='200'>Test</th><th>Fee</th></tr>"
                 $( ".parent" ).each(function() {
                     Receipt_html=Receipt_html+"<tr><td>"+$( this ).find(".name").val()+"</td><td>Rs "+$( this ).find(".fees").val()+"</td></tr>";
                 });

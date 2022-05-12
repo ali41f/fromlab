@@ -186,11 +186,11 @@ class TestsPerformedController extends Controller
                 return abort(503, "Invalid request");
 
             //inventory
-            foreach ($available_test->available_test_inventories as $test_inventory) {
-                $test_inventory->inventory->update([
-                    "remainingItem" => $test_inventory->inventory->remainingItem - $test_inventory->itemUsed
-                ]);
-            }
+            // foreach ($available_test->available_test_inventories as $test_inventory) {
+            //     $test_inventory->inventory->update([
+            //         "remainingItem" => $test_inventory->inventory->remainingItem - $test_inventory->itemUsed
+            //     ]);
+            // }
 
             //fee
             if (isset($request->fees[$key]) && $request->fees[$key])
