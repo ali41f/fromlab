@@ -41,6 +41,9 @@
             /* padding-top: -2px; */
 
         }
+        .patientdatatable{
+            display: none;
+        }
 
 
     </style>
@@ -66,14 +69,31 @@
         <div class="card-body">
             <form method="POST" action="{{ route('test-performed') }}" id="test_form" enctype="multipart/form-data">
                 @csrf
+
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label class="required" for="patient_id">Select Patient Name</label>
-                            <select onchange="set_patient()" data-placeholder="Select Patient" class="form-control select2 {{ $errors->has('patients') ? 'is-invalid' : '' }}" name="patient_id" id="patient_id" required>
+                            <label class="" for="referred">Write MRID</label>
+                            <input class="form-control" type="text" name="patientmrid" id="patientmrid">
+                            <table class="patientdatatable">
                                 @foreach($patientNames as $patientName)
-                                    <option patientName="{{$patientName->Pname}}" gender="{{$patientName->gend}}" dob="{{ $patientName->dob }}" discount="{{ $patientName->category->discount }}" value="{{ $patientName->id }}">{{ $patientName->Pname }} ( {{ $patientName->id }} )</option>
+                                    <tr mrid="{{$patientName->id}}" pname="{{$patientName->Pname}}" gend="{{$patientName->gend}}" dob="{{$patientName->dob}}" discount="{{$patientName->category->discount}}"></tr>
                                 @endforeach
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="required" for="patient_id">Selected Patient Name</label>
+                            <select onchange="set_patient()" data-placeholder="Select Patient" class="form-control {{ $errors->has('patients') ? 'is-invalid' : '' }}" name="patient_id" id="patient_id" required>
+                                
+                                <option patientName="{{$patientNames[0]->Pname}}" gender="{{$patientNames[0]->gend}}" dob="{{ $patientNames[0]->dob }}" discount="{{ $patientNames[0]->category->discount }}" value="{{ $patientNames[0]->id }}">{{ $patientNames[0]->Pname }} ( {{ $patientNames[0]->id }} )</option>
+                                
                             </select>
                             @if($errors->has('user'))
                                 <div class="invalid-feedback">
@@ -138,12 +158,12 @@
                             </div>
                         </div>
 
-                        <div class="col-3 ml-2" style="padding-top: 28px;">
+                        <div class="col-3 ml-2" style="padding-top: 8px;">
                             <button type="button" class="btn btn-success add_btn " id="">Add Test</button>
                             <br/>
                         </div>
 
-                        <div class="col-12 mt-2 mb-2" id="all"></div>
+                        <div class="col-12 mt-2 mb-5" id="all"></div>
 
                         <div class="col-md-3 mb-2 mt-2">
                             <div class="input-group">
@@ -203,9 +223,23 @@
 
         set_patient();
         make_receipt();
+        search_by_mrid();
+
+        function search_by_mrid(){
+            $('#patientmrid').on('input',function(e){
+                let tr = $('table.patientdatatable').find(`[mrid='${e.target.value}']`);
+                //console.log(tr);
+                if(tr.length){
+                    console.log(tr.attr('mrid'))
+                    $('select#patient_id').html('<option patientName="'+tr.attr('pname')+'" gender="'+tr.attr('gend')+'" dob="'+tr.attr('dob')+'" discount="'+tr.attr('discount')+'" value="'+tr.attr('mrid')+'">'+tr.attr('pname')+' ( '+tr.attr('mrid')+' )</option>');
+                    set_patient();
+                }
+            });
+        }
 
 
         function set_patient() {
+            console.log("set patient");
             years = 0;
             months = 0;
             days = 0;
@@ -237,10 +271,10 @@
             $( ".save_btn" ).click(function() {
                 referred = $("#referred").val();
                 let Receipt_styles = "<style>"
-                Receipt_styles+=".receipt_con{font-family: Arial; width:290px; margin: 0 auto; border-radius: 5px; margin-bottom: 10px; border: 1px solid black; padding: 30px;}"
+                Receipt_styles+=".receipt_con{font-family: Arial; width:300px; margin: 0 auto; border-radius: 5px; margin-bottom: 10px; border: 1px solid black; padding: 20px;}"
                 Receipt_styles+=".receipt_con h3{text-align: center; margin-top:0;margin-bottom: 10px;}"
                 Receipt_styles+=".receipt_con p{text-align: center;}"
-                Receipt_styles+=".receipt_con table{font-size: 13px; text-align: left; width: 100%}"
+                Receipt_styles+=".receipt_con table{font-size: 14px; text-align: left; width: 100%}"
                 Receipt_styles+="</style>"
 
                 let d = Date.now();
@@ -249,7 +283,7 @@
                 let t = (d.getHours() > 12 ? d.getHours() - 12 : d.getHours())+':'+d.getMinutes()+' '+(d.getHours() >= 12 ? "PM" : "AM");
 
                 let Receipt_html = Receipt_styles+"<div class='receipt_con'><h3>Welcome to Usama Laboratory</h3><p><strong>www.usamalab.com</strong></p>";
-                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br />WhatsApp: 03253411392<br />Receipt</p>";
+                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br />Receipt</p>";
 
                 Receipt_html+="<table class='table'>"
                 Receipt_html+="<tr><td>Patient's name</td><td>"+$('#patient_id option:selected').attr('patientName').trim()+"</td></tr>"
@@ -261,7 +295,7 @@
                 Receipt_html+="<tr><td>Referred by</td><td>"+referred+"</td></tr>"
                 Receipt_html+="<tr><td>Lab attendant</td><td>"+username+"</td></tr></table><hr />"
 
-                Receipt_html+="<table><tr><th width='200'>Test</th><th>Fee</th></tr>"
+                Receipt_html+="<table><tr><th>Test</th><th>Fee</th></tr>"
                 $( ".parent" ).each(function() {
                     Receipt_html=Receipt_html+"<tr><td>"+$( this ).find(".name").val()+"</td><td>Rs "+$( this ).find(".fees").val()+"</td></tr>";
                 });
