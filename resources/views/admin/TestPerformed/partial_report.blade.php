@@ -91,6 +91,7 @@
         margin-bottom: 0;
     }
 </style>
+
 <div class="report_body">
     <div class="pl-20 mb-3 testname text-capitalize"><h2>{{$testPerformedsId->testReport->count() == 1 ? '' : str_replace("*", "", $testPerformedsId->availableTest->name)}}</h2></div>
 <!-- <div class="pl-20"><h4>{{ $testPerformedsId->availableTest->category->Cname  }}</h4></div> -->
