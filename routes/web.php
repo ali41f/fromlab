@@ -144,6 +144,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('salesdata', [Controllers\SalesDataController::class,'index'])->name('salesdata');
     Route::post('salesdata', [Controllers\SalesDataController::class,'getDataBetweenTime'])->name('salesdata');
+
+    Route::get('criticalReport', [Controllers\SalesDataController::class,'criticalReport'])->name('criticalReport');
+    Route::post('criticalReport', [Controllers\SalesDataController::class,'criticalReportProcess'])->name('criticalReportProcess');
     
 });
 

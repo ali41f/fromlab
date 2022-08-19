@@ -20,6 +20,8 @@ class TestPerformed extends Model
         'comments',
         'referred',
 //        'testResult',
+        'informed_by',
+        'informed_to'
     ];
     public function patient()
     {

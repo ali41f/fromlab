@@ -96,8 +96,6 @@
     $('#duration').durationPicker();
     $('#duration2').durationPicker();
     
-
-    
     $(function() {
 
         let copyButtonTrans = '{{ trans('global.datatables.copy') }}'

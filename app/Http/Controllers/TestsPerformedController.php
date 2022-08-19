@@ -149,6 +149,7 @@ class TestsPerformedController extends Controller
     public function create()
     { 
         $patientNames = Patient::orderBy('created_at', 'DESC')->with('category')->get();
+
         $availableTests = AvailableTest::get(['name', 'testCode', 'id']);
         //dd($patientNames);
         // $availableTests = AvailableTest::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -299,6 +300,8 @@ class TestsPerformedController extends Controller
         $test_performed->update([
             'status' => $request->status,
             "comments" => $request->comments,
+            "informed_to" => $request->informed_to,
+            "informed_by" => $request->informed_by,
             "referred" => $request->referred,
         ]);
 

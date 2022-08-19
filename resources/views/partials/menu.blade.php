@@ -91,6 +91,14 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route("criticalReport") }}" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-tachometer-alt">
+                    </i>
+                    <strong>Critical Data</strong>
+                </a>
+            </li>
+
 
 
 

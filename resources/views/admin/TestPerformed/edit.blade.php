@@ -100,7 +100,6 @@
                         </div>
                     </div>
 
-
                     <div id="test_form" class="row col-md-12 mb-2 d-none">
 
                         @foreach($allAvailableTests as $test)
@@ -353,6 +352,22 @@
                     <div class="form-group shadow-textarea col-md-12">
                         <label>Comment</label>
                         <textarea class="form-control z-depth-1" name="comments" rows="3">@php echo $performed->comments @endphp</textarea>
+                    </div>
+
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="informed_to"><strong>Informed To: </strong></label>
+                                <input class="form-control inlineform" type="text" name="informed_to" id="informed_to" value="{{ old('informed_to', $performed->informed_to) }}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="informed_by"><strong>Informed By: </strong></label>
+                                <input class="form-control inlineform" type="text" name="informed_by" id="informed_by" value="{{ old('informed_by', $performed->informed_by) }}" />
+                            </div>
+                        </div>
                     </div>
                     <button class="btn btn-primary mt-3 ml-1" type="submit">Update</button>
                 </div>

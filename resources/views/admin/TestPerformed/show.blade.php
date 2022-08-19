@@ -80,6 +80,15 @@
             @include("admin.TestPerformed.partial_patient")
             @include("admin.TestPerformed.partial_report")
 
+            @if($testPerformedsId->informed_to)
+
+            <div class="row">
+                <div class="col-12 ml-3">
+                        Informed To: {{ $testPerformedsId->informed_to }}
+                </div>
+            </div>
+            @endif
+
             <div class="webfooter noprint">
                 <div class="webfooter-item abu"><strong class="drname">Dr. Usama Rehman</strong><br />Assistant Professor<br />MBBS, FCPS (Histopathology)<br />Consultant Histopathologist</div>
                 <div class="webfooter-item bhai"><strong class="drname">Prof. Dr. Abdul Hakeem Ch.</strong><br />MBBS, DCP<br />M.Phil (Microbiology)<br />Consultant Pathologist</div>
@@ -97,8 +106,6 @@
             <button class="btn btn-success ml-4 btnsave">Send message</button>
         </div>
         @endif
-
-        
 
         <div class="alert alert-success notificationbar" role="alert">Report has been sent successfully.</div>
         <div class="alert alert-danger notificationbar" role="alert"></div>
