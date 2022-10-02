@@ -43,6 +43,9 @@ class TestsPerformedController extends Controller
         $searchValue = $search_arr['value']; // Search value
 
         // Total records
+        $totalRecords = 102000;
+        $totalRecordswithFilter = $totalRecords;
+        /*
         $totalRecords = TestPerformed::select('count(*) as allcount')->count();
         $totalRecordswithFilter = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
         ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
@@ -52,19 +55,17 @@ class TestsPerformedController extends Controller
         ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
         ->orWhere('patients.id', 'like', '%' . $searchValue . '%')
         ->count();
-
+            */
         // Get records, also we have included search filter as well
 
         $records = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
             ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
-            ->join('categories', 'available_tests.category_id', '=', 'categories.id')
+            //->join('categories', 'available_tests.category_id', '=', 'categories.id')
             ->select('test_performeds.*', 'patients.Pname', 'patients.dob', 'patients.id as Pid', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
-                'available_tests.testFee', 'categories.Cname', 'test_performeds.created_at', 'test_performeds.specimen')
+                'available_tests.testFee', 'test_performeds.created_at', 'test_performeds.specimen')
             ->where('patients.Pname', 'like', '%' . $searchValue . '%')
             ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
-            ->orWhere('patients.id', 'like', '%' . $searchValue . '%')
-            ->orWhere('patients.Pname', 'like', '%' . $searchValue . '%')
-            ->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
+            //->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
             ->orderBy($columnName, $columnSortOrder)
             ->skip($start)
             ->take($rowperpage)
