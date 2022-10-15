@@ -293,6 +293,7 @@
                             <td>{{ (isset($testPerformedsId->widal) && $testPerformedsId->widal->where("type", "th_4")->first() && $testPerformedsId->widal->where("type", "th_4")->first()->value == "true") ? "+" : "-"}}</td>
                             <td>{{ (isset($testPerformedsId->widal) && $testPerformedsId->widal->where("type", "th_5")->first() && $testPerformedsId->widal->where("type", "th_5")->first()->value == "true") ? "+" : "-"}}</td>
                         </tr>
+                        <!--
                         <tr>
                             <td>AO</td>
                             <td>{{ (isset($testPerformedsId->widal) && $testPerformedsId->widal->where("type", "ao_1")->first() && $testPerformedsId->widal->where("type", "ao_1")->first()->value == "true") ? "+" : "-"}}</td>
@@ -325,6 +326,7 @@
                             <td>{{ (isset($testPerformedsId->widal) && $testPerformedsId->widal->where("type", "bh_4")->first() && $testPerformedsId->widal->where("type", "bh_4")->first()->value == "true") ? "+" : "-"}}</td>
                             <td>{{ (isset($testPerformedsId->widal) && $testPerformedsId->widal->where("type", "bh_5")->first() && $testPerformedsId->widal->where("type", "bh_5")->first()->value == "true") ? "+" : "-"}}</td>
                         </tr>
+                        -->
                     </table>
                 </div>
                 <div class="col-12 mt-3">

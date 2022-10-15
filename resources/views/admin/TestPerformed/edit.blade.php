@@ -302,6 +302,7 @@
                                                 <td><input type="checkbox" name="th[]" value="4" <?php echo ($test->id == $performed->availableTest->id && isset($performed->widal) && $performed->widal->where("type", "th_4")->first() && $performed->widal->where("type", "th_4")->first()->value == "true") ? "checked" : ""; ?>></td>
                                                 <td><input type="checkbox" name="th[]" value="5" <?php echo ($test->id == $performed->availableTest->id && isset($performed->widal) && $performed->widal->where("type", "th_5")->first() && $performed->widal->where("type", "th_5")->first()->value == "true") ? "checked" : ""; ?>></td>
                                             </tr>
+                                            <!--
                                             <tr>
                                                 <td>AO</td>
                                                 <td><input type="checkbox" name="ao[]" value="1" <?php echo ($test->id == $performed->availableTest->id && isset($performed->widal) && $performed->widal->where("type", "ao_1")->first() && $performed->widal->where("type", "ao_1")->first()->value == "true") ? "checked" : ""; ?>></td>
@@ -334,6 +335,7 @@
                                                 <td><input type="checkbox" name="bh[]" value="4" <?php echo ($test->id == $performed->availableTest->id && isset($performed->widal) && $performed->widal->where("type", "bh_4")->first() && $performed->widal->where("type", "bh_4")->first()->value == "true") ? "checked" : ""; ?>></td>
                                                 <td><input type="checkbox" name="bh[]" value="5" <?php echo ($test->id == $performed->availableTest->id && isset($performed->widal) && $performed->widal->where("type", "bh_5")->first() && $performed->widal->where("type", "bh_5")->first()->value == "true") ? "checked" : ""; ?>></td>
                                             </tr>
+                                            -->
                                         </table>
                                     </div>
                                     <div class="col-12 mt-2">
