@@ -19,10 +19,10 @@
                         <b> <label for="user_id">Phone</label></b>
                         <p>{{ $patient->phone ?? '' }}</p>
                     </div>
-                    <div class="col">
+                    <!--<div class="col">
                         <b> <label for="user_id">Email</label></b>
                         <p>{{ $patient->email ?? '' }}</p>
-                    </div>
+                    </div> -->
                     <div class="col">
                         <b> <label for="user_id">Register Date</label></b>
                         <p>{{ date('d-m-Y H:i:s', strtotime($patient->start_time ?? '')) }}</p>

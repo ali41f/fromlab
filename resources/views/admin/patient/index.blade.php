@@ -20,7 +20,7 @@
                         <th>MR ID</th>
                         <th>Name</th>
                         <th>phone</th>
-                        <th>email</th>
+                        <!--<th>email</th>-->
                         <th>Age</th>
                         <th>Registration</th>
                         <th>Action</th>
@@ -84,7 +84,7 @@
                     {data: 'id'},
                     {data: 'Pname'},
                     {data: 'phone'},
-                    {data: 'email'},
+                    //{data: 'email'},
                     {data: 'dob'},
                     {data: 'registration'},
                     {data: 'action'},

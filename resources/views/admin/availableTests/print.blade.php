@@ -11,10 +11,11 @@
                 <table class=" table table-bordered table-striped table-hover datatable datatable-Event">
                     <thead>
                     <tr>
-                    
+                    <!--
                         <th>
                             Category
                         </th>
+                    -->
                         <th>
                             Test name
                         </th>
@@ -26,10 +27,11 @@
                     <tbody>
                     @foreach($availableTests as $key => $availableTest)
                         <tr data-entry-id="{{ $availableTest->id }}">
-                            
+                        <!--    
                             <td>
                                 {{ $availableTest->category->Cname ?? '' }}
                             </td>
+                        -->
                             <td>
                                 {{ $availableTest->name ?? '' }}
                             </td>

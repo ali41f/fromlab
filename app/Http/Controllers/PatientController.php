@@ -73,7 +73,7 @@ class PatientController extends Controller
                 "id" => $record->id,
                 "Pname" => $record->Pname,
                 "phone" => $record->phone,
-                "email" => $record->email,
+                //"email" => $record->email,
                 "dob" => \Carbon\Carbon::parse($record->dob)->diff(\Carbon\Carbon::now())->format('%y years %m months %d days'),
                 "registration" =>  date('d-m-Y H:i:s', strtotime($record->start_time ?? '')),
                 "action" => actionView($record->id),

@@ -24,7 +24,7 @@
            Looks good!
         </div>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4 mb-3" style="display: none">
         <div class="form-group">
                 <label class="" for="email">Email</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email', '') }}" >

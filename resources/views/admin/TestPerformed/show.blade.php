@@ -75,7 +75,9 @@
         <div id="widgetreport">
             <div class="webheader noprint">
                 <div class="webheader-item usamalabeng">USAMA Clinical & PCR Laboratory<br /><span style="font-size: 18px; color: #2e6e69">Phone number: 068-5889116. Address: Hospital Road, Rahim Yar Khan</span></div>
+                <!--
                 <img style="opacity: .04; border-radius: 50%; top: 0px; position: absolute; left:0;" class="card-img-top card d-flex" src="{{ asset('images/lablogo.png') }}"/>
+                -->
             </div>
             @include("admin.TestPerformed.partial_patient")
             @include("admin.TestPerformed.partial_report")
@@ -102,7 +104,8 @@
 
         @if($testPerformedsId->status == 'verified')
         <div style="background: white" class="col-md-12 mb-12 noprint text-center py-3">
-            <button class="btn btn-primary" onclick="window.print()">Print Report</button>
+            <button class="btn btn-info btnpdf">Download PDF</button>
+            <button class="btn btn-primary ml-4" onclick="window.print()">Print Report</button>
             <button class="btn btn-success ml-4 btnsave">Send message</button>
         </div>
         @endif
@@ -113,6 +116,7 @@
     </div>
 
     <script type="text/javascript" src="../../../js/html2canvas.min.js"></script>
+    <script type="text/javascript" src="../../../js/html2pdf.bundle.min.js"></script>
 
     <script>
 
@@ -120,6 +124,15 @@
         
         let tests_arr;
 
+        $(".btnpdf").click(function() { 
+            const filename = $('.patientname').text() + ".pdf"
+            const element = document.getElementById("widgetreport");
+            html2pdf().from(element)
+            .set({filename: filename, html2canvas: { scale: 1, scrollY: 0 }, margin: [10, 0, 0, 0], pagebreak: {mode: 'avoid-all'}, image: {type: 'jpeg',quality: 0.98},})
+            .save();
+        });
+
+       // send sms 
        $(".btnsave").click(function() { 
             $(".btnsave").text('Sending ...');
 

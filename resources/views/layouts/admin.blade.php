@@ -143,6 +143,7 @@
                 columns: ':visible'
               }
             },
+            /*
             {
               extend: 'copy',
               className: 'btn-default',
@@ -191,6 +192,7 @@
                 columns: ':visible'
               }
             }
+            */
           ]
         });
 
