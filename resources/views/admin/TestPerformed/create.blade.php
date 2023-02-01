@@ -283,7 +283,7 @@
                 let t = (d.getHours() > 12 ? d.getHours() - 12 : d.getHours())+':'+d.getMinutes()+' '+(d.getHours() >= 12 ? "PM" : "AM");
 
                 let Receipt_html = Receipt_styles+"<div class='receipt_con'><h3>Welcome to Usama Laboratory</h3><p><strong>www.usamalab.com</strong></p>";
-                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br />Receipt</p>";
+                Receipt_html+="<p>Hospital Road, Rahim Yar Khan<br />Ph: 068-5889116<br /> WhatsApp: 03253411392<br />Receipt</p>";
 
                 Receipt_html+="<table class='table'>"
                 Receipt_html+="<tr><td>Patient's name</td><td>"+$('#patient_id option:selected').attr('patientName').trim()+"</td></tr>"

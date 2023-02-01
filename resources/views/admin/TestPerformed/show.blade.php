@@ -128,7 +128,7 @@
             const filename = $('.patientname').text() + ".pdf"
             const element = document.getElementById("widgetreport");
             html2pdf().from(element)
-            .set({filename: filename, html2canvas: { scale: 1, scrollY: 0 }, margin: [10, 0, 0, 0], pagebreak: {mode: 'avoid-all'}, image: {type: 'jpeg',quality: 0.98},})
+            .set({filename: filename, html2canvas: { scale: 1, scrollY: 0 }, margin: [0, 0, 0, 0], pagebreak: {mode: 'avoid-all'}, image: {type: 'jpeg',quality: 1},})
             .save();
         });
 
