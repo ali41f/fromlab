@@ -19,7 +19,7 @@
                         <tr>
                             <th>Test ID</th>
                             <th>Name</th>
-                            <th>Patient</th>
+                            <th>MRID</th>
                             <th>Specimen</th>
                             <th>Ref by</th>
                             <th>Testcreated</th>

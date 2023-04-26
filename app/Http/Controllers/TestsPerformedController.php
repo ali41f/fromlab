@@ -58,13 +58,25 @@ class TestsPerformedController extends Controller
             */
         // Get records, also we have included search filter as well
 
-        $records = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
-            ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
+        // $records = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
+        //     ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
+        //     //->join('categories', 'available_tests.category_id', '=', 'categories.id')
+        //     ->select('test_performeds.*', 'patients.Pname', 'patients.dob', 'patients.id as Pid', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
+        //         'available_tests.testFee', 'test_performeds.created_at', 'test_performeds.specimen')
+        //     ->where('patients.Pname', 'like', '%' . $searchValue . '%')
+        //     ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
+        //     //->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
+        //     ->orderBy($columnName, $columnSortOrder)
+        //     ->skip($start)
+        //     ->take($rowperpage)
+        //     ->get();
+
+        $records = TestPerformed::join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
             //->join('categories', 'available_tests.category_id', '=', 'categories.id')
-            ->select('test_performeds.*', 'patients.Pname', 'patients.dob', 'patients.id as Pid', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
+            ->select('test_performeds.*', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
                 'available_tests.testFee', 'test_performeds.created_at', 'test_performeds.specimen')
-            ->where('patients.Pname', 'like', '%' . $searchValue . '%')
-            ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
+            //->where('patients.Pname', 'like', '%' . $searchValue . '%')
+            ->where('available_tests.name', 'like', '%' . $searchValue . '%')
             //->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
             ->orderBy($columnName, $columnSortOrder)
             ->skip($start)
@@ -127,7 +139,7 @@ class TestsPerformedController extends Controller
                 "id" => $record->id,
                 "Name" => $record->name,
                 "Cname" => $record->Cname,
-                "patient_id" => $record->Pname ." (". $record->Pid.")",
+                "patient_id" => $record->patient_id,
                 "Specimen" => $record->specimen,
                 "referred" => $record->referred,
                 "created_at" =>  $record->created_at->format('d-m-Y H:i:s'),
