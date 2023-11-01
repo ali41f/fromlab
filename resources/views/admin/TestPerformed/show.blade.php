@@ -69,6 +69,7 @@
             padding: 7px 25px;
             line-height: 1.3;
         }
+        
     </style>
     <div class="card" style="background: white; font-size: 16px;">
         
@@ -105,7 +106,7 @@
         @if($testPerformedsId->status == 'verified')
         <div style="background: white" class="col-md-12 mb-12 noprint text-center py-3">
             <button class="btn btn-info btnpdf">Download PDF</button>
-            <button class="btn btn-primary ml-4" onclick="window.print()">Print Report</button>
+            <button class="btn btn-primary ml-4 printreportbtn" >Print Report</button>
             <button class="btn btn-success ml-4 btnsave">Send message</button>
         </div>
         @endif
@@ -114,7 +115,7 @@
         <div class="alert alert-danger notificationbar" role="alert"></div>
 
     </div>
-
+    <script type="text/javascript" src="../../../js/printThis.js"></script>
     <script type="text/javascript" src="../../../js/html2canvas.min.js"></script>
     <script type="text/javascript" src="../../../js/html2pdf.bundle.min.js"></script>
 
@@ -123,6 +124,11 @@
     $(function () {
         
         let tests_arr;
+
+
+        $(".printreportbtn").click(function() { 
+            $('#widgetreport').printThis();
+        });
 
         $(".btnpdf").click(function() { 
             const filename = $('.patientname').text() + ".pdf"
@@ -165,12 +171,17 @@
                     },
                     success: function(response) {
                         $(".btnsave").text('Send message');
-                        if(response == "success"){
+                        console.log(response)
+                        if(response.includes(".jpg")){
                             $.ajax({
-                                url: '/api/smsstatus',
+                                url: '/api/sendfromlocal',
                                 type: 'POST',
                                 data: {
                                     testslist: tests_arr,
+                                    patientname: $('.patientname').attr('patientname'),
+                                    phone: phonenum,
+                                    mrid: $('.patientmrid').attr('mrid'),
+                                    imagepath: response,
                                 },
                                 success: function(response) {
                                     $(".btnsave").text('Send message');

@@ -9,16 +9,6 @@
   padding: 1em;
   /* border: solid gray; */
 }
-.report_detail{
-    font-size: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding:5px 10px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    margin-top: 153px;
-    margin-bottom: 15px;
-}
 
 .hr {
     border-top: 2px solid red;

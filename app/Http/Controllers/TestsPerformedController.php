@@ -287,7 +287,7 @@ class TestsPerformedController extends Controller
                 ]);
             }
         }
-        return redirect()->route('tests-performed');
+        return redirect()->route('patient-list');
     }
 
     public function edit($id)
@@ -295,10 +295,10 @@ class TestsPerformedController extends Controller
         $performed = TestPerformed::with('AvailableTest')->get()->find($id);
         //dd($performed);
         $getNameFromAvailbles = AvailableTest::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        $patientNames = Patient::all()->pluck('Pname', 'id')->prepend(trans('global.pleaseSelect'), '');
+        //$patientNames = Patient::all()->pluck('Pname', 'id')->prepend(trans('global.pleaseSelect'), '');
         $allAvailableTests = AvailableTest::all();
 
-        return view('admin.TestPerformed.edit', compact("allAvailableTests", 'performed', 'getNameFromAvailbles', 'patientNames'));
+        return view('admin.TestPerformed.edit', compact("allAvailableTests", 'performed', 'getNameFromAvailbles'));
     }
 
     public function update($id, Request $request)
