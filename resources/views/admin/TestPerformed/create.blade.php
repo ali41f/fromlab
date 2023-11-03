@@ -193,7 +193,7 @@
         <div class="alert alert-danger error_msg text-center" style="display: none"></div>
 
         <div>
-            @foreach($allAvailableTests as $test)
+            @foreach($availableTests as $test)
 
                 <script>
                     var test{{$test->id}}_standard ={{$test->testFee}};
@@ -366,7 +366,7 @@
                 select.parentElement.parentElement.parentNode.getElementsByClassName("urgent_fee")[0].innerText = "";
                 select.parentElement.parentElement.parentNode.getElementsByClassName("standard_fee")[0].innerText = "";
             }
-
+            console.log("set test form");
 
             if (select.parentElement.parentElement.parentElement.getElementsByClassName("ckeditor")[0]) {
                 CKEDITOR.replace(select.parentElement.parentElement.parentElement.getElementsByClassName("ckeditor")[0], {
@@ -432,7 +432,7 @@
             $("#available_test_id").val(null);
 
             updateFee();
-
+            console.log("test added");
             //delete record
             let delete_btn = document.querySelector('.btn' + random_num);
             delete_btn.onclick = function (e) {
