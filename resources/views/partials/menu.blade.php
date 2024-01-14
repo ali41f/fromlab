@@ -21,24 +21,29 @@
                     <i class="fa fa-circle-thin" aria-hidden="true"></i> All Tests
                 </a>
             </li>
-            @if(auth::check() && Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
+            @if(auth::check() && Auth::user()->role == 'admin' || Auth::user()->role == 'manager' || Auth::user()->role == 'receptionist')
 
             <li class="nav-item">
+            
+
                 <a href="{{ route("available-tests") }}" class="nav-link">
                  <span class="nav-icon"><i class="fas fa-file-medical"></i></span>                    
                     <strong>Available Tests</strong>
                 </a>
+            
+            @if(auth::check() && Auth::user()->role == 'admin')
                 <a style="margin-left:15px" href="{{ route("available-test-create") }}" class="nav-link">                 
                     <i class="fa fa-circle-thin" aria-hidden="true"></i> Add New Test
                 </a>
+            @endif
                 <a style="margin-left:15px" href="{{ route("available-tests") }}" class="nav-link">
                     <i class="fa fa-circle-thin" aria-hidden="true"></i> All Available Tests
                 </a>
                 <a style="margin-left:15px" href="{{ route("category") }}" class="nav-link">                   
                     <i class="fa fa-circle-thin" aria-hidden="true"></i> Test Categories
                 </a>
-                <a type="hidden" style="" href="{{ route("catagory-list") }}" class="">                   
-                    
+                <a type="hidden" style="margin-left:15px" href="{{ route("print-tests") }}" class="nav-link">                   
+                    <i class="fa fa-circle-thin" aria-hidden="true"></i> Charge master
                 </a>
             </li>
             @endif

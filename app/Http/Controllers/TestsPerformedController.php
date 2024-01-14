@@ -216,7 +216,7 @@ class TestsPerformedController extends Controller
             // }
 
             if ($specimen == "") {
-                $specimen = "S-" . Carbon::now()->format("y") . "-" . TestPerformed::next_id();
+                $specimen = "S-" . Carbon::now()->format("y") . "-" . (TestPerformed::next_id() - 268769);
             }
 
             //store

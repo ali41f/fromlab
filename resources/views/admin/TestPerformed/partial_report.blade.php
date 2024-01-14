@@ -72,7 +72,10 @@
         text-align: center;
         font-weight: bold;
     }
-    
+
+    .editordiv{
+        overflow: hidden;
+    }
     .editordiv p{
         line-height: 1.0;
         margin-bottom: 0.3rem;
@@ -90,6 +93,9 @@
         font-size: 21px;
         line-height: 1.1;
         margin-bottom: 0;
+    }
+    @media print {
+        .newpage-print {page-break-after: always;}
     }
 </style>
 

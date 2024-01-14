@@ -247,3 +247,7 @@ table.dataTable.no-footer {
     }
     
 }
+
+@media print {
+    .newpage-print {page-break-after: always;}
+  }

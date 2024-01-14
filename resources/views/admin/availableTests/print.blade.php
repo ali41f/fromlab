@@ -20,7 +20,16 @@
                             Test name
                         </th>
                         <th>
-                            Test Fee
+                            Standard Time
+                        </th>
+                        <th>
+                            Urgent Time
+                        </th>
+                        <th>
+                            Standard Fee
+                        </th>
+                        <th>
+                            Urgent Fee
                         </th>
                     </tr>
                     </thead>
@@ -36,10 +45,18 @@
                                 {{ $availableTest->name ?? '' }}
                             </td>
                             <td>
+                            {{\Carbon\CarbonInterval::seconds($availableTest->stander_timehour)->cascade()->forHumans() }}
+                            </td>
+                            <td>
+                            {{\Carbon\CarbonInterval::seconds($availableTest->urgent_timehour)->cascade()->forHumans() }}
+                            </td>
+                            <td>
                                 {{ $availableTest->testFee ?? '' }}
                             </td>
 
-                            
+                            <td>
+                                {{ $availableTest->urgentFee ?? '' }}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
