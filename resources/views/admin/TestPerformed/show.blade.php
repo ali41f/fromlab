@@ -185,17 +185,17 @@
                                 },
                                 success: function(response) {
                                     $(".btnsave").text('Send message');
-                                    if(response == "done"){
-                                        console.log(response)
+                                    console.log(response)
+                                    if(JSON.parse(response).success == "true"){
                                         $('.alert-success').fadeIn(300).delay(30000).fadeOut(1000);
-                                    }else if(response == "notdone"){
-                                        $('.alert-danger').text("Done but status not changed");
+                                    }else{
+                                        $('.alert-danger').text(JSON.parse(response).results[0].error);
                                         $('.alert-danger').fadeIn(300).delay(30000).fadeOut(1000);
                                     }
                                 },
                                 error: function() {
                                     $(".btnsave").text('Send message');
-                                    $('.alert-danger').text("An error has occurred in changing status.");
+                                    $('.alert-danger').text("An error has occurred while changing status.");
                                     $('.alert-danger').fadeIn(300).delay(30000).fadeOut(1000);
                                 }
                             });

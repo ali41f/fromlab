@@ -208,11 +208,12 @@ $(function () {
                                 },
                                 success: function(response) {
                                     $(".btnsave").text('Send message');
-                                    if(response == "done"){
-                                        $('.alert-success').fadeIn(300).delay(50000).fadeOut(1000);
-                                    }else if(response == "notdone"){
-                                        $('.alert-danger').text("Done but status not changed");
-                                        $('.alert-danger').fadeIn(300).delay(50000).fadeOut(1000);
+                                    console.log(response)
+                                    if(JSON.parse(response).success == "true"){
+                                        $('.alert-success').fadeIn(300).delay(30000).fadeOut(1000);
+                                    }else{
+                                        $('.alert-danger').text(JSON.parse(response).results[0].error);
+                                        $('.alert-danger').fadeIn(300).delay(30000).fadeOut(1000);
                                     }
                                 },
                                 error: function() {

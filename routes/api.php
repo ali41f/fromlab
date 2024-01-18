@@ -84,8 +84,8 @@ Route::post('/sendfromlocal', function(Request $request) {
         ->update([
             'sms' => 'sent',
         ]);
-
-    return "done";
+    
+    return $response2;
 });
 
 Route::post('/smsstatus', function(Request $request) {
