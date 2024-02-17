@@ -292,7 +292,9 @@ class TestsPerformedController extends Controller
 
     public function edit($id)
     {
-        $performed = TestPerformed::with('AvailableTest')->get()->find($id);
+        $performed = TestPerformed::with(['AvailableTest' => function($query) {
+            $query->select('id', 'name', 'type');
+        }])->find($id);
         //dd($performed);
         $getNameFromAvailbles = AvailableTest::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         //$patientNames = Patient::all()->pluck('Pname', 'id')->prepend(trans('global.pleaseSelect'), '');
