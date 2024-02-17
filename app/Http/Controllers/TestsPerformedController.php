@@ -161,13 +161,11 @@ class TestsPerformedController extends Controller
 
     public function create()
     { 
-        $patientNames = Patient::orderBy('created_at', 'DESC')->with('category')->get();
+        $initialPatient = Patient::orderBy('created_at', 'DESC')->with('category')->first();
 
         $availableTests = AvailableTest::get(['name', 'testCode', 'id', 'testFee', 'urgentFee']);
         //dd($patientNames);
-        // $availableTests = AvailableTest::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-        //$allAvailableTests = AvailableTest::all();
-        return view('admin.TestPerformed.create', compact('patientNames', 'availableTests'));
+        return view('admin.TestPerformed.create', compact('initialPatient', 'availableTests'));
     }
 
     public function store(Request $request)

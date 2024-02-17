@@ -99,7 +99,7 @@ class PatientController extends Controller
             return response()->json([
                 'id' => $patient->id,
                 'Pname' => $patient->Pname,
-                'gender' => $patient->gender,
+                'gender' => $patient->gend,
                 'dob' => $patient->dob,
                 'discount' => $patient->category ? $patient->category->discount : 0 
             ]);

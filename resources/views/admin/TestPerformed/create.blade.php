@@ -88,8 +88,12 @@
                             <label class="required" for="patient_id">Selected Patient Name</label>
                             <select onchange="set_patient()" data-placeholder="Select Patient" class="form-control {{ $errors->has('patients') ? 'is-invalid' : '' }}" name="patient_id" id="patient_id" required>
                                 
-                                <option patientName="{{$patientNames[0]->Pname}}" gender="{{$patientNames[0]->gend}}" dob="{{ $patientNames[0]->dob }}" discount="{{ $patientNames[0]->category->discount }}" value="{{ $patientNames[0]->id }}">{{ $patientNames[0]->Pname }} ( {{ $patientNames[0]->id }} )</option>
-                                
+                            @if($initialPatient)
+                                <option patientName="{{ $initialPatient->Pname }}" gender="{{ $initialPatient->gend }}" dob="{{ $initialPatient->dob }}" discount="{{ $initialPatient->category->discount ?? '0' }}" value="{{ $initialPatient->id }}">
+                                    {{ $initialPatient->Pname }} ({{ $initialPatient->id }})
+                                </option>
+                            @endif 
+                                                            
                             </select>
                             @if($errors->has('user'))
                                 <div class="invalid-feedback">
