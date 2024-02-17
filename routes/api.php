@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\TestPerformed;
+use App\Http\Controllers\PatientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,8 @@ use App\Models\TestPerformed;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/patients/{mrid}', [PatientController::class, 'getByMRID']);
 
 Route::post('/sendfromlocal', function(Request $request) {
     

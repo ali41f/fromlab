@@ -75,11 +75,7 @@
                         <div class="form-group">
                             <label class="" for="referred">Write MRID</label>
                             <input class="form-control" type="text" name="patientmrid" id="patientmrid">
-                            <table class="patientdatatable">
-                                @foreach($patientNames as $patientName)
-                                    <tr mrid="{{$patientName->id}}" pname="{{$patientName->Pname}}" gend="{{$patientName->gend}}" dob="{{$patientName->dob}}" discount="{{$patientName->category->discount}}"></tr>
-                                @endforeach
-                            </table>
+                            
                         </div>
                     </div>
 
@@ -225,16 +221,39 @@
         make_receipt();
         search_by_mrid();
 
-        function search_by_mrid(){
-            $('#patientmrid').on('input',function(e){
-                let tr = $('table.patientdatatable').find(`[mrid='${e.target.value}']`);
-                //console.log(tr);
-                if(tr.length){
-                    console.log(tr.attr('mrid'))
-                    $('select#patient_id').html('<option patientName="'+tr.attr('pname')+'" gender="'+tr.attr('gend')+'" dob="'+tr.attr('dob')+'" discount="'+tr.attr('discount')+'" value="'+tr.attr('mrid')+'">'+tr.attr('pname')+' ( '+tr.attr('mrid')+' )</option>');
-                    set_patient();
+        function search_by_mrid() {
+            $('#patientmrid').on('input', function(e) {
+                const mrid = e.target.value;
+                if (mrid.length > 0) { 
+                    $.ajax({
+                        url: `/api/patients/${mrid}`, 
+                        method: 'GET',
+                        success: function(data) {
+                            if (data) {
+                                updatePatientSelection(data);
+                            }
+                        },
+                        error: function() {
+                            console.error('Failed to fetch patient data');
+                        }
+                    });
                 }
             });
+        }
+
+        function updatePatientSelection(patientData) {
+            const select = $('select#patient_id');
+            select.empty(); 
+            const option = new Option(`${patientData.Pname} (${patientData.id})`, patientData.id, true, true);
+            $(option).attr({
+                'patientname': patientData.Pname,
+                'gender': patientData.gender,
+                'dob': patientData.dob,
+                'discount': patientData.discount
+            });
+            select.append(option).trigger('change');
+
+            set_patient(); 
         }
 
 

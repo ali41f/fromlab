@@ -90,6 +90,24 @@ class PatientController extends Controller
         echo json_encode($response);
     }
 
+    public function getByMRID($mrid) {
+        $patient = Patient::with('category') 
+                    ->where('id', $mrid)
+                    ->first();
+
+        if ($patient) {
+            return response()->json([
+                'id' => $patient->id,
+                'Pname' => $patient->Pname,
+                'gender' => $patient->gender,
+                'dob' => $patient->dob,
+                'discount' => $patient->category ? $patient->category->discount : 0 
+            ]);
+        } else {
+            return response()->json(['error' => 'Patient not found'], 404);
+        }
+    }
+
     public function create()
     {
         $patientCategorys = PatientCategory::all()->pluck('Pcategory', 'id')->prepend(trans('global.pleaseSelect'), '');
