@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('ckeditor5/build/ckeditor.js') }}"></script>
 
     <style>
         hr {
@@ -17,6 +17,9 @@
         input.inlineform{
             display: inline-block;
             width: 70%;
+        }
+        .ck.ck-editor{
+            width: 100%;
         }
     </style>
     <div class="card">
@@ -378,34 +381,37 @@
         </div>
     </div>
     <script>
-
+        
         function set_test_form() {
-            if (document.getElementById("available_test_id").value)
+            if (document.getElementById("available_test_id").value) {
                 document.getElementById("test_form").innerHTML = eval("test" + document.getElementById("available_test_id").value);
-            else
+            } else {
                 document.getElementById("test_form").innerHTML = "";
+            }
 
-            
-            if (document.getElementsByName("ckeditor").length) {
-                CKEDITOR.replace("ckeditor", {
-                    width: '100%',
-                    extraPlugins: 'pastefromword,pagebreak,justify,font',
-                });
+            const ckeditorTextarea = document.querySelector('[name="ckeditor"]');
+            if (ckeditorTextarea) {
+                ClassicEditor
+                    .create(ckeditorTextarea, {})
+                    .catch(error => {
+                        console.error(error);
+                    });
             }
-            if (document.getElementsByName("comments").length) {
-                CKEDITOR.replace("comments", {
-                    width: '100%',
-                    extraPlugins: 'justify,font',
+
+            // Initialize CKEditor 5 for the 'comments' textarea
+            ClassicEditor
+                .create(document.querySelector('[name="comments"]'), {})
+                .catch(error => {
+                    console.error(error);
                 });
-            }
+
             document.getElementById("test_form").classList.remove("d-none");
-            console.log($('.testnameh4').text());
-            if($('.testnameh4').text() == 'Semen Analysis'){
+            
+            if ($('.testnameh4').text() == 'Semen Analysis') {
                 if (!$("[name=comments]").val()) {
                     $("[name=comments]").val("Gel Liquified Within 30 mins.");
                 }
             }
-            
         }
 
         set_test_form();
