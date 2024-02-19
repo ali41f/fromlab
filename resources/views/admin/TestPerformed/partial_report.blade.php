@@ -75,10 +75,11 @@
 
     .editordiv{
         overflow: hidden;
+        font-size: 18px;
     }
     .editordiv p{
-        line-height: 1.0;
-        margin-bottom: 0.3rem;
+        line-height: 1.1;
+        margin-bottom: 0.25rem;
     }
     .editordiv table td{
         padding: 0px 12px 2px 12px;
