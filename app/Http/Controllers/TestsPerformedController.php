@@ -415,8 +415,13 @@ class TestsPerformedController extends Controller
 
     public function show($id)
     {
-        $testPerformedsId = TestPerformed::findOrFail($id);
+        $testPerformedsId = TestPerformed::with('patient')->findOrFail($id);
+    
+        // No need to separately fetch the patient since it's already eager loaded
+        // Directly access the patient from the loaded $testPerformedsId object
         $getpatient = $testPerformedsId->patient;
+
+        // Return the view with the same variables as before
         return view('admin.TestPerformed.show', compact('testPerformedsId', 'getpatient'));
     }
 
