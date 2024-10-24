@@ -20,11 +20,6 @@ class AvailableTest extends Model
         'resultValueCount',
         'type',
         'testCode',
-//        'initialNormalValue',
-//        'finalNormalValue',
-//        'firstCriticalValue',
-//        'finalCriticalValue',
-//        'units',
     ];
 
     public function category()

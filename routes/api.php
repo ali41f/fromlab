@@ -43,7 +43,7 @@ Route::post('/sendfromlocal', function(Request $request) {
 
 
  
-    $url = "http://mywhatsapp.pk/api/send.php";
+    $url = "http://myapi.pk/api/send.php";
      
     $parameters = array("api_key" => "923253411392-a89d3d6f-1e62-4944-8b61-e42423e079b5",
                         "mobile" => $phone,

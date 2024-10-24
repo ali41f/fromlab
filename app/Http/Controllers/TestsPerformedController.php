@@ -45,45 +45,14 @@ class TestsPerformedController extends Controller
         // Total records
         $totalRecords = 102000;
         $totalRecordswithFilter = $totalRecords;
-        /*
-        $totalRecords = TestPerformed::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
-        ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
-        ->join('categories', 'available_tests.category_id', '=', 'categories.id')
-        ->select('count(*) as allcount')
-        ->where('patients.Pname', 'like', '%' . $searchValue . '%')
-        ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
-        ->orWhere('patients.id', 'like', '%' . $searchValue . '%')
-        ->count();
-            */
-        // Get records, also we have included search filter as well
-
-        // $records = TestPerformed::join('patients', 'test_performeds.patient_id', '=', 'patients.id')
-        //     ->join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
-        //     //->join('categories', 'available_tests.category_id', '=', 'categories.id')
-        //     ->select('test_performeds.*', 'patients.Pname', 'patients.dob', 'patients.id as Pid', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
-        //         'available_tests.testFee', 'test_performeds.created_at', 'test_performeds.specimen')
-        //     ->where('patients.Pname', 'like', '%' . $searchValue . '%')
-        //     ->orWhere('available_tests.name', 'like', '%' . $searchValue . '%')
-        //     //->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
-        //     ->orderBy($columnName, $columnSortOrder)
-        //     ->skip($start)
-        //     ->take($rowperpage)
-        //     ->get();
-
-        $records = TestPerformed::join('available_tests', 'test_performeds.available_test_id', '=', 'available_tests.id')
-            //->join('categories', 'available_tests.category_id', '=', 'categories.id')
-            ->select('test_performeds.*', 'available_tests.name', 'available_tests.stander_timehour', 'available_tests.urgent_timehour',
-                'available_tests.testFee', 'test_performeds.created_at', 'test_performeds.specimen')
-            //->where('patients.Pname', 'like', '%' . $searchValue . '%')
-            ->where('available_tests.name', 'like', '%' . $searchValue . '%')
-            //->orWhere('categories.Cname', 'like', '%' . $searchValue . '%')
+        
+        $records = TestPerformed::select('id', 'available_test_name', 'patient_id', 'status', 'specimen', 'referred', 'fee', 'sms', 'type', 'informed_by', 'created_at')
+            ->where('available_test_name', 'like', '%' . $searchValue . '%')
             ->orderBy($columnName, $columnSortOrder)
             ->skip($start)
             ->take($rowperpage)
             ->get();
 
-            //return $records;
 
         $data_arr = array();
 
@@ -104,16 +73,16 @@ class TestsPerformedController extends Controller
             return $str;
         }
 
-        function statusView($id, $status, $urgent, $standard, $type, $timestamp) {
-            if($type === "urgent") 
-                $timehour = $urgent;
-            elseif($type === "standard")
-                $timehour = $standard;
+        function statusView($id, $status, $timestamp) {
+            // if($type === "urgent") 
+            //     $timehour = $urgent;
+            // elseif($type === "standard")
+            //     $timehour = $standard;
 
             if ($status =='verified')
                 $str = '<button class="btn btn-xs btn-success">Verified</button>';
-            elseif ((\Carbon\Carbon::now()->timestamp > $timehour + $timestamp) && $status == "process")
-                $str = '<button class="btn btn-xs btn-danger">Delayed</button>';
+            // elseif ((\Carbon\Carbon::now()->timestamp > $timehour + $timestamp) && $status == "process")
+            //     $str = '<button class="btn btn-xs btn-danger">Delayed</button>';
             elseif ( $status == "process" )
                 $str = '<button class="btn btn-xs btn-info">In Process</button>';
             elseif ( $status == "cancelled" )
@@ -137,13 +106,13 @@ class TestsPerformedController extends Controller
             
             $data_arr[] = array(
                 "id" => $record->id,
-                "Name" => $record->name,
-                "Cname" => $record->Cname,
+                "Name" => $record->available_test_name,
+                //"Cname" => $record->Cname,
                 "patient_id" => $record->patient_id,
                 "Specimen" => $record->specimen,
                 "referred" => $record->referred,
                 "created_at" =>  $record->created_at->format('d-m-Y H:i:s'),
-                "Status" => statusView($record->id, $record->status, $record->urgent_timehour, $record->stander_timehour, $record->type, $record->created_at->timestamp),
+                "Status" => statusView($record->id, $record->status, $record->created_at->timestamp),
                 "sms" => smsView($record->sms),
                 "Action" => actionView($record->id),
             );
@@ -224,6 +193,7 @@ class TestsPerformedController extends Controller
             $test_performed->type = $request->types[$key];
             $test_performed->specimen = $specimen;
             $test_performed->fee = $fee;
+            $test_performed->available_test_name = $available_test->name;
 
             if (!empty($request->comments[$key])) {
                 $test_performed->comments = $request->comments[$key];
